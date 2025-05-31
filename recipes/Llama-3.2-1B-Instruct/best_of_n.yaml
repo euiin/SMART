@@ -1,0 +1,11 @@
+# refer to src/sal/config.py for more options
+
+model_path: llama1b-finetune #meta-llama/Llama-3.2-1B-Instruct
+approach: best_of_n
+search_batch_size: 25
+sort_completed: true
+filter_duplicates: true
+seed: 0
+# specify n
+# specify score_method: default is prm
+#   if 'conf', specify conf_strategy: default is probs_mean

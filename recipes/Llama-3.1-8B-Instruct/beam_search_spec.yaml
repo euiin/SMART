@@ -1,0 +1,13 @@
+# refer to src/sal/config.py for more options
+model_path: meta-llama/Llama-3.1-8B-Instruct
+draft_model_path: llama1b-finetune #meta-llama/Llama-3.2-1B-Instruct
+filter_duplicates: true
+approach: beam_search
+search_batch_size: 1  # DO NOT CHANGE!
+num_iterations: 40
+seed: 0
+speculative_search: true
+# specify n
+# specify beam_width
+# specify score_method: default is prm
+#   if 'conf', specify conf_strategy: default is probs_mean

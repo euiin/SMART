@@ -1,0 +1,12 @@
+# refer to src/sal/config.py for more options
+model_path: Qwen/Qwen2.5-7B-Instruct
+custom_chat_template: null
+filter_duplicates: true
+approach: beam_search
+search_batch_size: 1  # DO NOT CHANGE!
+seed: 0
+speculative_search: false
+# specify n
+# specify beam_width
+# specify score_method: default is prm
+#   if 'conf', specify conf_strategy: default is probs_mean
