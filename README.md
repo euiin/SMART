@@ -2,8 +2,8 @@
 
 Codebase for the paper:
 > **Guiding Reasoning in Small Language Models with LLM Assistance**  
-> Yujin Kim\*, Euiin Yi\*, Minu Kim, Se-Young Yun $\dagger$, Taehyeon Kim $\dagger$ 
-> \* equal contribution $\dagger$ equal advising
+> Yujin Kim\*, Euiin Yi\*, Minu Kim, Se-Young Yun $\dagger$, Taehyeon Kim $\dagger$ <br>
+> \* equal contribution $\dagger$ equal advising <br>
 > [arXiv:2504.09923](https://arxiv.org/abs/2504.09923)
 
 ---
