@@ -30,11 +30,11 @@ from sal.utils.score import score
 from sal.search import \
     best_of_n, \
     best_of_n_conf, \
-    speculative_best_of_n, \
+    smart_best_of_n, \
     beam_search, \
     beam_search_conf, \
-    speculative_beam_search, \
-    speculative_beam_search_conf, \
+    smart_beam_search, \
+    smart_beam_search_conf, \
     dvts
 from datasets import Dataset
 logging.basicConfig(level=logging.INFO)
@@ -44,12 +44,12 @@ logger.setLevel(logging.INFO)
 
 APPROACHES = {
     "beam_search":beam_search,
-    "beam_search_spec": speculative_beam_search,
+    "beam_search_smart": smart_beam_search,
     "beam_search_conf": beam_search_conf,
-    "beam_search_spec_conf": speculative_beam_search_conf,
+    "beam_search_smart_conf": smart_beam_search_conf,
     "dvts": dvts,
     "best_of_n": best_of_n,
-    "best_of_n_spec": speculative_best_of_n,
+    "best_of_n_smart": smart_best_of_n,
     "best_of_n_conf": best_of_n_conf,
 }
 
@@ -72,7 +72,7 @@ def main():
     print("The number of available GPUs:", num_gpus)
     
     # configure approach name
-    approach_suffix = "_spec" if config.speculative_search else ""
+    approach_suffix = "_smart" if config.smart_search else ""
     approach_suffix += "_conf" if config.score_method == 'conf' else ""
     approach_name = config.approach + approach_suffix
     
@@ -82,17 +82,17 @@ def main():
     
     # log the search method and score method
     print("\nUsing " + \
-        ("Speculative" if config.speculative_search else "Baseline") + \
+        ("SMART" if config.smart_search else "Baseline") + \
         " search.\nUsing " + \
         ("Confidence" if config.score_method == 'conf' else "PRM") + \
         " based score.\n")
-    if config.speculative_search:
+    if config.smart_search:
         print("Threshold:", config.threshold)
     print("N:", config.n)
     print("Beam width:", config.beam_width)
     print("="*20)
     
-    if config.speculative_search:                
+    if config.smart_search:                
         mp.set_start_method("spawn", force=True)
         slm = LLM(
             model=config.draft_model_path,

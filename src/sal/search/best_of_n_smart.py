@@ -40,7 +40,7 @@ def convert_to_chat_template(problem_str, partial_completion: None, config: Conf
         
 
 
-def speculative_best_of_n(x, config: Config, slm: LLM, prm: PRM, llm: None):
+def smart_best_of_n(x, config: Config, slm: LLM, prm: PRM, llm: None):
     tokenizer = slm.get_tokenizer()
     tokenizer.padding_side = "left"
     # TODO: set the augmented template from a file

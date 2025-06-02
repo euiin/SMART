@@ -59,7 +59,7 @@ def _beam_search(batch_of_prompts, config: Config, slm: LLM, prm: PRM, llm: None
                     all_scores=[],
                     previous_text=None,
                     completion_tokens=[],
-                    spec_step=[],
+                    smart_step=[],
                     prm_update=[], # we leave this empty
                     gen_update=[],
                     llm_tokens=[],
@@ -68,7 +68,7 @@ def _beam_search(batch_of_prompts, config: Config, slm: LLM, prm: PRM, llm: None
 
     completed_beams: list[Beam] = []
     total_tokens = 0
-    spec_done = False
+    smart_done = False
     
     for iterate_idx in tqdm(range(config.num_iterations), desc="Beam search iterations"):
         if iterate_idx == 0:
@@ -206,7 +206,7 @@ def _beam_search(batch_of_prompts, config: Config, slm: LLM, prm: PRM, llm: None
             if idx not in top_indices:
                 beam.pruned = True
                 
-        # speculative beam search implementation       
+        # SMART beam search implementation       
         # # filter the pruned beams with low scores
         # active_beams = [b for b in active_beams if not b.pruned]
         # agg_scores = [agg_scores[idx] for idx in top_indices]
@@ -215,7 +215,7 @@ def _beam_search(batch_of_prompts, config: Config, slm: LLM, prm: PRM, llm: None
         if len(re_indices) == 0:
             continue
         
-        spec_done = True
+        smart_done = True
         re_beams = [prev_active_beams[idx] for idx in re_indices]          
         
         convs = [
@@ -260,7 +260,7 @@ def _beam_search(batch_of_prompts, config: Config, slm: LLM, prm: PRM, llm: None
 
         for i, (re_idx, beam) in enumerate(zip(re_indices, re_beams)):
             # log correction information
-            beam.spec_step.append(iterate_idx)
+            beam.smart_step.append(iterate_idx)
             beam.gen_update.append((active_beams[re_idx].next_texts[0], beam.next_texts[0]))
             beam.llm_tokens.append(len(tokenizer.encode(beam.next_texts[0])))
             total_tokens += len(tokenizer.encode(beam.next_texts[0]))
@@ -293,9 +293,9 @@ def _beam_search(batch_of_prompts, config: Config, slm: LLM, prm: PRM, llm: None
     # for problem, info in problem_info.items():
     #     print(f"{{question: {problem}, generate_llm: {info['generate_llm']}, score_changed: {info['score_changed']}, text_changed: {info['text_changed']}}}")
 
-    if spec_done == False:
+    if smart_done == False:
         for beam in completed_beams:
-            beam.spec_step = [-1]
+            beam.smart_step = [-1]
             beam.gen_update = [('-1', '-1')]
             beam.llm_tokens = [-1]
     
@@ -307,7 +307,7 @@ def _beam_search(batch_of_prompts, config: Config, slm: LLM, prm: PRM, llm: None
     return completed_beams, total_tokens, prm_scores
 
 
-def speculative_beam_search_conf(examples, config: Config, slm: LLM, prm: PRM, llm: None):
+def smart_beam_search_conf(examples, config: Config, slm: LLM, prm: PRM, llm: None):
     problems = examples["problem"]
     beam_results, total_tokens, prm_scores = _beam_search(problems, config, slm, prm, llm)
 

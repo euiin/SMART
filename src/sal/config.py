@@ -25,7 +25,7 @@ from sal.utils.hub import get_dataset_revisions
 class Config:
     approach: Literal["best_of_n", "beam_search", "dvts"] = "best_of_n"
     score_method: str = 'prm' # 'conf'     # originally logprobs_base_score
-    speculative_search: bool = False
+    smart_search: bool = False
     prm_batch_size: int = 8
     model_path: str = "meta-llama/Llama-3.2-1B-Instruct"
     draft_model_path: str = None

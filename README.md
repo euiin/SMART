@@ -2,7 +2,8 @@
 
 Codebase for the paper:
 > **Guiding Reasoning in Small Language Models with LLM Assistance**  
-> Yujin Kim, Euiin Yi, Minu Kim, Se-Young Yun, Taehyeon Kim  
+> Yujin Kim$^\*$, Euiin Yi$^\*$, Minu Kim, Se-Young Yun$^\dagger$, Taehyeon Kim$^\dagger$  
+> \* equal contribution $&nbsp$ $\dagger$ equal advising
 > [arXiv:2504.09923](https://arxiv.org/abs/2504.09923)
 
 ---
@@ -18,6 +19,7 @@ bash run_qwen.sh <OPTION_NUMBER>
 # or
 bash run_llama.sh <OPTION_NUMBER>
 ```
+Note: Multiple runs might be needed to reproduce performance. 
 
 ### Available options (for Qwen):
 | OPTION | Model Pair            | Search Type | Score Method |
@@ -46,7 +48,7 @@ SMART/
 ```
 
 ## 📊 Reproducing Results
-SMART is evaluated on **MATH500** and extended to **MMLU-Pro**. Details on settings, scoring, and results are in our [paper](https://arxiv.org/abs/2504.09923). SMART supports:
+SMART is evaluated on **MATH500**. Details on settings, scoring, and results are in our [paper](https://arxiv.org/abs/2504.09923). SMART supports:
 - Best-of-N & Beam Search
 - Scoring with PRM or token-level confidence(TLC)
 

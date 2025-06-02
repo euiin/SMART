@@ -33,12 +33,12 @@ elif [ $OPTION -eq 3 ]; then
 # run smart, best-of-n, score-method=prm
 elif [ $OPTION -eq 4 ]; then
     export CUDA_VISIBLE_DEVICES=4
-    export CONFIG=recipes/Qwen2.5-7B-Instruct/beam_search_spec.yaml
+    export CONFIG=recipes/Qwen2.5-7B-Instruct/beam_search_smart.yaml
     python scripts/test_time_compute.py $CONFIG --n=16 --beam_width=1
 
 # run smart, beam-search, score-method=prm
 elif [ $OPTION -eq 5 ]; then
     export CUDA_VISIBLE_DEVICES=5
-    export CONFIG=recipes/Qwen2.5-7B-Instruct/beam_search_spec.yaml
+    export CONFIG=recipes/Qwen2.5-7B-Instruct/beam_search_smart.yaml
     python scripts/test_time_compute.py $CONFIG --n=16 --beam_width=4
 fi

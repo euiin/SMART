@@ -84,9 +84,9 @@ def save_dataset(dataset, config):
         # Name the folder based on the approach used
         if config.draft_model_path is not None:
             if config.score_method == 'prm':
-                folder_name = "spec_prm"
+                folder_name = "smart_prm"
             elif config.score_method == 'conf':
-                folder_name = "spec_conf"
+                folder_name = "smart_conf"
         else: 
             if config.score_method == 'prm':
                 folder_name = "base_prm"

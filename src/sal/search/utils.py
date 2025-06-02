@@ -70,7 +70,7 @@ class Beam:
     history: list[str] = field(default_factory=list) 
     completed: bool = False
     completion_tokens: list[int] = field(default_factory=list)
-    spec_step: list[int] = field(default_factory=list)
+    smart_step: list[int] = field(default_factory=list)
     agg_score_update: list[tuple[float, float]] = field(default_factory=list)
     prm_update: list[tuple[float, float]] = field(default_factory=list)
     likelihood_update: list[tuple[float, float]] = field(default_factory=list)
