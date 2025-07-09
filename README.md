@@ -55,7 +55,7 @@ SMART is evaluated on **MATH500**. Details on settings, scoring, and results are
 ## 📦 Installation
 ```bash
 conda create -n smart python=3.11 && conda activate smart
-pip install -e '\.\[dev\]'  # install SMART in editable mode
+pip install -e '.[dev]'  # install SMART in editable mode
 huggingface-cli login
 sudo apt-get install git-lfs
 ```
